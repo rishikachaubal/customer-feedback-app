@@ -37,8 +37,8 @@ steps:
     - 'image'
     - 'deployment/customer-feedback-app-deployment' # Name of your Deployment from deployment.yaml
     - 'customer-feedback-app=gcr.io/eighth-beacon-466412-f3/customer-feedback-app:$SHORT_SHA' # Container name and new image
-    - '--cluster=${_CLUSTER_NAME}' # Use a substitution variable for cluster name
-    - '--location=${_CLUSTER_LOCATION}' # Use a substitution variable for cluster location (region)
+      #- '--cluster=${_CLUSTER_NAME}' # Use a substitution variable for cluster name
+      #- '--location=${_CLUSTER_LOCATION}' # Use a substitution variable for cluster location (region)
     - '--namespace=default' # Or your specific namespace if you created one
   env:
     # These environment variables are required by the kubectl builder to find the cluster
