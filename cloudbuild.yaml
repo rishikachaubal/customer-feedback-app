@@ -51,3 +51,7 @@ substitutions:
 images:
   - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:$SHORT_SHA'
   - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:latest'
+options:
+  # This tells Cloud Build to use a regional bucket owned by your project for logs.
+  # This is generally the recommended approach when using custom service accounts.
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
