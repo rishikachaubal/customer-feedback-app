@@ -12,15 +12,19 @@ steps:
     - '.' # Build context is the current directory (project root)
   dir: '.' # Execute from the project root (where Dockerfile is)
 
-# Step 2: Push the Docker image to Google Container Registry (GCR)
-# Uses the 'docker' Cloud Build builder again.
+# Step 2: Push the Docker image with $SHORT_SHA tag to GCR
 - name: 'gcr.io/cloud-builders/docker'
-  id: Push
+  id: Push-SHA
   args:
     - 'push'
     - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:$SHORT_SHA'
-    - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:latest'
 
+# Step 3: Push the Docker image with :latest tag to GCR
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push-Latest
+  args:
+    - 'push'
+    - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:latest'
 # Step 3: Deploy to GKE
 # Uses the 'kubectl' Cloud Build builder.
 # This step requires the Cloud Build service account to have permissions to deploy to GKE.
