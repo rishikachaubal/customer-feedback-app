@@ -1,0 +1,148 @@
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+    background: linear-gradient(135deg, #f0f2f5 0%, #e0e5ec 100%); /* Soft gradient background */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    color: #333; /* Darker text for readability */
+    line-height: 1.6;
+}
+
+/* Main Container Styling */
+.container {
+    background-color: #ffffff;
+    padding: 40px; /* Increased padding */
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+    width: 100%;
+    max-width: 550px; /* Slightly wider container */
+    text-align: center;
+    animation: fadeIn 0.8s ease-out; /* Fade-in animation */
+}
+
+/* Headings */
+h1 {
+    color: #2c3e50; /* Dark blue/grey for headings */
+    margin-bottom: 25px;
+    font-size: 2.2em; /* Larger heading */
+    font-weight: 600; /* Semi-bold */
+}
+
+/* Paragraphs */
+p {
+    color: #555;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Increased spacing between form elements */
+    text-align: left;
+}
+
+/* Labels */
+label {
+    font-weight: 600; /* Semi-bold labels */
+    color: #444;
+    margin-bottom: 5px; /* Space between label and input */
+    display: block; /* Ensure label takes full width */
+}
+
+/* Input Fields and Textarea */
+input[type="text"],
+textarea {
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 12px 10px; /* More padding */
+    border: 1px solid #ccc; /* Lighter border */
+    border-radius: 8px; /* More rounded input fields */
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Subtle glow on focus */
+    outline: none; /* Remove default outline */
+}
+
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Minimum height for textarea */
+}
+
+/* Submit Button */
+button {
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    padding: 14px 25px; /* More padding for a larger button */
+    border: none;
+    border-radius: 8px; /* Rounded button */
+    cursor: pointer;
+    font-size: 1.1em; /* Larger font size */
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); /* Subtle button shadow */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3); /* Enhanced shadow on hover */
+}
+
+button:active {
+    transform: translateY(0); /* Press effect */
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Links */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Adjustments (Optional but good practice) */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        margin: 10px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    p {
+        font-size: 1em;
+    }
+    button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}
