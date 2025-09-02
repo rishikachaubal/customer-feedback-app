@@ -14,7 +14,7 @@ body {
 
 /* Main Container Styling */
 .container {
-    background-color: #fffbbf;
+    background-color: #fffbff;
     padding: 40px; /* Increased padding */
     border-radius: 12px; /* More rounded corners */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
