@@ -1,0 +1,53 @@
+steps:
+# Step 1: Build the Docker image
+# Uses the 'docker' Cloud Build builder.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  args:
+    - 'build'
+    - '-t'
+    - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:$SHORT_SHA' # Tag with short SHA for unique versioning
+    - '-t'
+    - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:latest' # Also tag as latest for convenience
+    - '.' # Build context is the current directory (project root)
+  dir: '.' # Execute from the project root (where Dockerfile is)
+
+# Step 2: Push the Docker image to Google Container Registry (GCR)
+# Uses the 'docker' Cloud Build builder again.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+    - 'push'
+    - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:$SHORT_SHA'
+    - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:latest'
+
+# Step 3: Deploy to GKE
+# Uses the 'kubectl' Cloud Build builder.
+# This step requires the Cloud Build service account to have permissions to deploy to GKE.
+# (We granted 'roles/container.developer' to 'cloudbuild-gke-deployer' SA in Terraform,
+# and will grant the default Cloud Build SA permission to impersonate it in Task 4c).
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Deploy
+  args:
+    - 'set'
+    - 'image'
+    - 'deployment/customer-feedback-app-deployment' # Name of your Deployment from deployment.yaml
+    - 'customer-feedback-app=gcr.io/eighth-beacon-466412-f3/customer-feedback-app:$SHORT_SHA' # Container name and new image
+    - '--cluster=${_CLUSTER_NAME}' # Use a substitution variable for cluster name
+    - '--location=${_CLUSTER_LOCATION}' # Use a substitution variable for cluster location (region)
+    - '--namespace=default' # Or your specific namespace if you created one
+  env:
+    # These environment variables are required by the kubectl builder to find the cluster
+    - 'CLOUDSDK_COMPUTE_ZONE=${_CLUSTER_LOCATION}' # For zonal clusters, use CLOUDSDK_COMPUTE_ZONE. For regional, CLOUDSDK_CONTAINER_REGION.
+    - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
+
+# Define substitutions for cluster name and location
+# These values must match what you defined in your Terraform variables.tf and applied.
+substitutions:
+  _CLUSTER_NAME: feedback-cluster # Must match the name you gave in Terraform
+  _CLUSTER_LOCATION: us-central1 # Must match the region you gave in Terraform (e.g., us-central1)
+
+# Images to be stored in GCR (optional, but good for visibility in Cloud Build UI)
+images:
+  - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:$SHORT_SHA'
+  - 'gcr.io/eighth-beacon-466412-f3/customer-feedback-app:latest'
