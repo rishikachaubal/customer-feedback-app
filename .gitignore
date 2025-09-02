@@ -1,0 +1,20 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node.js (if applicable)
+node_modules/
+npm-debug.log
+
+# General
+.DS_Store
+*.log
+*.swp
