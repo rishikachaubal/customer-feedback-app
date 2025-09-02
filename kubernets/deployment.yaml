@@ -18,6 +18,6 @@ spec:
       - name: customer-feedback-app # Name of the container within the pod
         # Placeholder image name. This will be updated by Cloud Build later.
         # Replace YOUR_GCP_PROJECT_ID with your actual GCP Project ID.
-        image: gcr.io/YOUR_GCP_PROJECT_ID/customer-feedback-app:latest
+        image: gcr.io/eighth-beacon-466412-f3/customer-feedback-app:latest
         ports:
         - containerPort: 8080 # The port your application listens on inside the container (from your Dockerfile)
