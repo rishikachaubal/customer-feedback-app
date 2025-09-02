@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-feedback-app-deployment # Name of your Deployment
+  labels:
+    app: customer-feedback-app
+spec:
+  replicas: 2 # Minimum 2 replicas for high availability
+  selector:
+    matchLabels:
+      app: customer-feedback-app
+  template:
+    metadata:
+      labels:
+        app: customer-feedback-app
+    spec:
+      containers:
+      - name: customer-feedback-app # Name of the container within the pod
+        # Placeholder image name. This will be updated by Cloud Build later.
+        # Replace YOUR_GCP_PROJECT_ID with your actual GCP Project ID.
+        image: gcr.io/YOUR_GCP_PROJECT_ID/customer-feedback-app:latest
+        ports:
+        - containerPort: 8080 # The port your application listens on inside the container (from your Dockerfile)
